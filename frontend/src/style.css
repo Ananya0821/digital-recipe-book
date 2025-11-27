@@ -1,0 +1,74 @@
+/* src/style.css */
+/* Fonts: Playfair Display (headings) + Inter (body) */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-cream-100 text-brown-400 font-body antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display text-brown-400;
+  }
+
+  a { @apply text-brown-400 hover:text-brown-300 }
+  p { @apply leading-relaxed }
+}
+
+/* Buttons */
+.btn-primary {
+  @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl2 bg-caramel-500 text-white shadow-card hover:shadow-hover hover:-translate-y-0.5 transition transform;
+}
+.btn-outline {
+  @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-neutral-200 text-brown-400 bg-white hover:bg-neutral-50 transition;
+}
+
+/* Card */
+.card {
+  @apply bg-white rounded-xl2 border border-neutral-200 shadow-card hover:shadow-hover transition p-4;
+}
+
+/* Tiny helpers */
+.kicker { @apply text-xs uppercase tracking-widest text-brown-300 font-medium }
+.small-muted { @apply text-xs text-brown-200 }
+/* ---------- WATERMARK / LOGO STYLES (paste at end of src/style.css) ---------- */
+
+
+
+/* ---------------- OPTION C: Corner decorative watermark ---------------- */
+.corner-watermark {
+  position: relative;
+}
+.corner-watermark::after {
+  content: "";
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  width: 160px;
+  height: 160px;
+  background-image: url("/recipebook_logo.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.06;  /* tweak */
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* -------------- PRINT: hide watermark on print -------------- */
+@media print {
+  .app-watermark::before,
+  .fixed-watermark-overlay img,
+  .corner-watermark::after {
+    display: none !important;
+  }
+}
